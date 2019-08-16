@@ -4,12 +4,17 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { QueteursDataSource, QueteursItem } from './queteurs-datasource';
 
+import { faCoffee, faComments } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'app-queteurs',
   templateUrl: './queteurs.component.html',
   styleUrls: ['./queteurs.component.scss']
 })
 export class QueteursComponent implements AfterViewInit, OnInit {
+  faCoffee = faCoffee;
+  faComments = faComments;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatTable, {static: false}) table: MatTable<QueteursItem>;

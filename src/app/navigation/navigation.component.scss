@@ -15,3 +15,27 @@
   top: 0;
   z-index: 1;
 }
+
+.mat-toolbar
+{
+  span
+  {
+    margin-left:15px;
+    fa-icon
+    {
+      margin-right:4px;
+      color:silver;
+    }
+  }
+
+  .logo
+  {
+    margin-left:10px;
+    margin-right:25px;
+  }
+
+  .preparation
+  {
+    margin-left:60px;
+  }
+}

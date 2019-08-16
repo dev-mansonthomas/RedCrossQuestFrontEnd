@@ -20,7 +20,15 @@
         >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span routerLink="/"><mat-icon color="accent">add</mat-icon>RedCrossQuest</span>
+      <span routerLink="/" class="logo"><fa-icon [icon]="faPlus"  size="lg" style="color:#E3001B;"></fa-icon>RedCrossQuest</span>
+      
+
+      <span routerLink="/queteurs" class="queteurs"   [matBadge]="pendingValidation" matBadgeOverlap="false" matBadgeColor="accent"><fa-icon [icon]="faUsers"      ></fa-icon>Quêteurs</span>
+
+      <span routerLink="/queteurs" class="preparation"><fa-icon [icon]="faClock"      ></fa-icon>Préparation</span>
+      <span routerLink="/queteurs" class="depart"     ><fa-icon [icon]="faSignOutAlt" ></fa-icon>Départ</span>
+      <span routerLink="/queteurs" class="retour"     ><fa-icon [icon]="faSignInAlt"  ></fa-icon>Retour</span>
+      <span routerLink="/queteurs" class="comptage"   ><fa-icon [icon]="faCoins"      ></fa-icon>Comptage</span>
     </mat-toolbar>
     
     <router-outlet></router-outlet>
