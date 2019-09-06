@@ -1,0 +1,15 @@
+<p>qr-scanner works!</p>
+<br/>
+<button (click)="toggle()">Toggle</button>
+<br/>
+{{qrCode}}
+<br/>
+<zxing-scanner 
+[enable]="enabled"
+
+(scanSuccess)="scanSuccessHandler($event)"
+(scanError)="scanErrorHandler($event)"
+(scanFailure)="scanFailureHandler($event)"
+(scanComplete)="scanCompleteHandler($event)"
+
+></zxing-scanner>

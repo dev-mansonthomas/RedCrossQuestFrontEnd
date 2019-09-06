@@ -21,17 +21,19 @@ import { faCoffee, faComments, faUsers } from '@fortawesome/free-solid-svg-icons
 
 
 
-
+import { QrCodeScannerModule  } from './tools/qr-code-scanner/qr-code-scanner.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { DepartComponent } from './tronc-queteur/depart/depart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    QueteursComponent
+    QueteursComponent,
+    DepartComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { NavigationComponent } from './navigation/navigation.component';
     MatPaginatorModule,
     MatSortModule,
     FontAwesomeModule,
-    MatBadgeModule
+    MatBadgeModule,
+    QrCodeScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
