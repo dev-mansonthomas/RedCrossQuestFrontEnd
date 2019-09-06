@@ -33,7 +33,7 @@ export class QrCodeScannerService {
    * */
   decodeQueteur(data:string, checkQueteurAlreadyDecodedFunction:Function, queteurDecodedAndFoundInDB:Function, queteurDecodedAndNotFoundInDB:Function)
   {
-    console.log(data);
+    //console.log(data);
 
     if(data  && data.length === this.queteurQRCodeLength)
     {
