@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyC0WmCjOcrmL3_k98o_u-9pCtw050alDCI",
-    authDomain: "rcq-fr-dev.firebaseapp.com",
-    databaseURL: "https://rcq-fr-dev.firebaseio.com",
-    projectId: "rcq-fr-dev",
-    storageBucket: "rcq-fr-dev.appspot.com",
+    apiKey: "TO REPLACE",
+    authDomain: "rcq-fr-test.firebaseapp.com",
+    databaseURL: "https://rcq-fr-test.firebaseio.com",
+    projectId: "rcq-fr-test",
+    storageBucket: "rcq-fr-test.appspot.com",
     messagingSenderId: "1022015855967",
     appId: "1:1022015855967:web:0f07ed6b1d960d03462aea"
   }
