@@ -12,7 +12,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
-
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
@@ -22,22 +21,21 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faCoffee, faComments, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 import { environment } from '../environments/environment';
 
-
-
 import { QrCodeScannerModule  } from './tools/qr-code-scanner/qr-code-scanner.module';
+import { QueteursModule  } from './queteurs/queteurs.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { DepartComponent } from './tronc-queteur/depart/depart.component';
-
-
+import { QueteModule } from './quete/quete.module';
+import { PointDeQuetesModule } from './point-de-quetes/point-de-quetes.module';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'popup',
@@ -69,14 +67,10 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
   credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM
 };
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
-    DepartComponent
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -94,9 +88,13 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatExpansionModule,
     FontAwesomeModule,
     MatBadgeModule,
-    QrCodeScannerModule
+    QrCodeScannerModule,
+    QueteursModule,
+    QueteModule,
+    PointDeQuetesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,10 +4,29 @@
       [mode]="'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="queteurs">Queteurs</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+    <mat-nav-list>      
+      <a mat-list-item routerLink="queteurs" [matBadge]="pendingValidation" matBadgeOverlap="false" matBadgeColor="accent"><fa-icon [icon]="faUsers"      ></fa-icon> Queteurs</a>
+
+      <a mat-list-item routerLink="/preparation" class="preparation"><fa-icon [icon]="faClock"      ></fa-icon>Préparation</a>
+      <a mat-list-item routerLink="/depart"      class="depart"     ><fa-icon [icon]="faSignOutAlt" ></fa-icon>Départ</a>
+      <a mat-list-item routerLink="/retour"      class="retour"     ><fa-icon [icon]="faSignInAlt"  ></fa-icon>Retour</a>
+      <a mat-list-item routerLink="/comptage"    class="comptage"   ><fa-icon [icon]="faCoins"      ></fa-icon>Comptage</a>
+
+      <a mat-list-item routerLink="/points-quete" class="comptage"   ><fa-icon [icon]="faCoins"      ></fa-icon>Points de Quête</a>
+
+
+
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Administration
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        
+          <p>This is the primary content of the panel.</p>
+        
+        </mat-expansion-panel>
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,12 +42,12 @@
       <span routerLink="/" class="logo"><fa-icon [icon]="faPlus"  size="lg" style="color:#E3001B;"></fa-icon>RedCrossQuest</span>
       
 
-      <span routerLink="/queteurs" class="queteurs"   [matBadge]="pendingValidation" matBadgeOverlap="false" matBadgeColor="accent"><fa-icon [icon]="faUsers"      ></fa-icon>Quêteurs</span>
+      <span routerLink="/queteurs"    class="queteurs"   [matBadge]="pendingValidation" matBadgeOverlap="false" matBadgeColor="accent"><fa-icon [icon]="faUsers"      ></fa-icon>Quêteurs</span>
 
-      <span routerLink="/queteurs"               class="preparation"><fa-icon [icon]="faClock"      ></fa-icon>Préparation</span>
-      <span routerLink="/tronc-queteur/depart"   class="depart"     ><fa-icon [icon]="faSignOutAlt" ></fa-icon>Départ</span>
-      <span routerLink="/tronc-queteur/retour"   class="retour"     ><fa-icon [icon]="faSignInAlt"  ></fa-icon>Retour</span>
-      <span routerLink="/tronc-queteur/comptage" class="comptage"   ><fa-icon [icon]="faCoins"      ></fa-icon>Comptage</span>
+      <span routerLink="/preparation" class="preparation"><fa-icon [icon]="faClock"      ></fa-icon>Préparation</span>
+      <span routerLink="/depart"      class="depart"     ><fa-icon [icon]="faSignOutAlt" ></fa-icon>Départ</span>
+      <span routerLink="/retour"      class="retour"     ><fa-icon [icon]="faSignInAlt"  ></fa-icon>Retour</span>
+      <span routerLink="/comptage"    class="comptage"   ><fa-icon [icon]="faCoins"      ></fa-icon>Comptage</span>
     </mat-toolbar>
     
     <router-outlet></router-outlet>
