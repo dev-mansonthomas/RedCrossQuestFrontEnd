@@ -11,6 +11,7 @@ import { TroncSearchComponent } from './tronc-search/tronc-search.component';
   declarations: [TroncsComponent, TroncComponent, TroncsQrCodeComponent, TroncSearchComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[TroncComponent, TroncComponent, TroncsQrCodeComponent, TroncSearchComponent]
 })
 export class TroncsModule { }

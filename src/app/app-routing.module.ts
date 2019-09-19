@@ -11,19 +11,27 @@ import { RetourComponent } from './quete/retour/retour.component';
 import { ComptageComponent } from './quete/comptage/comptage.component';
 
 import { PointDeQuetesComponent } from './point-de-quetes/point-de-quetes/point-de-quetes.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { LoggedInGuard } from 'ngx-auth-firebaseui';
+import { TroncsComponent } from './troncs/troncs/troncs.component';
 
 const routes: Routes = [
-  { path: 'queteurs', component: QueteursComponent },
-  { path: 'queteur', component: QueteurComponent },
 
-  { path: 'preparation', component: PreparationComponent },
-  { path: 'depart', component: DepartComponent },
-  { path: 'retour', component: RetourComponent },
-  { path: 'comptage', component: ComptageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'welcome', component: WelcomeComponent, canActivate:[LoggedInGuard] },
 
-  { path: 'points-quete', component:PointDeQuetesComponent},
+  { path: 'queteurs', component: QueteursComponent, canActivate:[LoggedInGuard] },
+  { path: 'queteur', component: QueteurComponent, canActivate:[LoggedInGuard] },
 
-  { path: 'tronc-queteur/depart', component: DepartComponent },
+  { path: 'preparation', component: PreparationComponent, canActivate:[LoggedInGuard] },
+  { path: 'depart', component: DepartComponent, canActivate:[LoggedInGuard] },
+  { path: 'retour', component: RetourComponent, canActivate:[LoggedInGuard] },
+  { path: 'comptage', component: ComptageComponent, canActivate:[LoggedInGuard] },
+
+  { path: 'points-quete', component:PointDeQuetesComponent, canActivate:[LoggedInGuard]},
+
+  { path: 'troncs', component: TroncsComponent, canActivate:[LoggedInGuard] },
 ];
 
 @NgModule({

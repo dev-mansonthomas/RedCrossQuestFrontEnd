@@ -12,10 +12,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
-import * as firebaseui from 'firebaseui';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -36,46 +32,19 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { QueteModule } from './quete/quete.module';
 import { PointDeQuetesModule } from './point-de-quetes/point-de-quetes.module';
-
-const firebaseUiAuthConfig: firebaseui.auth.Config = {
-  signInFlow: 'popup',
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    {
-      scopes: [
-        'public_profile',
-        'email',
-        'user_likes',
-        'user_friends'
-      ],
-      customParameters: {
-        'auth_type': 'reauthenticate'
-      },
-      provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID
-    },
-    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-    {
-      requireDisplayName: false,
-      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID
-    },
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
-  ],
-  tosUrl: '<your-tos-link>',
-  privacyPolicyUrl: '<your-privacyPolicyUrl-link>',
-  credentialHelper: firebaseui.auth.CredentialHelper.ACCOUNT_CHOOSER_COM
-};
-
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { LoginComponent } from './authentication/login/login.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { TroncsModule } from './troncs/troncs.module';
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    LoginComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, 'RedCrossQuest'),
-    AngularFireAuthModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
@@ -94,7 +63,27 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = {
     QrCodeScannerModule,
     QueteursModule,
     QueteModule,
-    PointDeQuetesModule
+    TroncsModule,
+    PointDeQuetesModule,
+    NgxAuthFirebaseUIModule.forRoot(environment.firebaseConfig,
+      () => 'RedCrossQuest',
+     {
+       enableFirestoreSync: true, // enable/disable autosync users with firestore
+       toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
+       toastMessageOnAuthError: true, // whether to open/show a snackbar message on auth error - default : true
+       authGuardFallbackURL: '/', // url for unauthenticated users - to use in combination with canActivate feature on a route
+       authGuardLoggedInURL: '/login', // url for authenticated users - to use in combination with canActivate feature on a route
+       passwordMaxLength: 60, // `min/max` input parameters in components should be within this range.
+       passwordMinLength: 8, // Password length min/max in forms independently of each componenet min/max.
+       // Same as password but for the name
+       nameMaxLength: 50,
+       nameMinLength: 2,
+       // If set, sign-in/up form is not available until email has been verified.
+       // Plus protected routes are still protected even though user is connected.
+       //guardProtectedRoutesUntilEmailIsVerified:true
+       
+
+     })
   ],
   providers: [],
   bootstrap: [AppComponent]
