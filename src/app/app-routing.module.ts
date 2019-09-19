@@ -15,10 +15,12 @@ import { LoginComponent } from './authentication/login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoggedInGuard } from 'ngx-auth-firebaseui';
 import { TroncsComponent } from './troncs/troncs/troncs.component';
+import { CurrentUserComponent } from './authentication/current-user/current-user.component';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
+  { path: 'current-user', component: CurrentUserComponent, canActivate:[LoggedInGuard] },
   { path: 'welcome', component: WelcomeComponent, canActivate:[LoggedInGuard] },
 
   { path: 'queteurs', component: QueteursComponent, canActivate:[LoggedInGuard] },

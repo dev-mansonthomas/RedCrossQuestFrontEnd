@@ -36,12 +36,14 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { LoginComponent } from './authentication/login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { TroncsModule } from './troncs/troncs.module';
+import { CurrentUserComponent } from './authentication/current-user/current-user.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     LoginComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    CurrentUserComponent
   ],
   imports: [
     BrowserModule,
@@ -71,8 +73,8 @@ import { TroncsModule } from './troncs/troncs.module';
        enableFirestoreSync: true, // enable/disable autosync users with firestore
        toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
        toastMessageOnAuthError: true, // whether to open/show a snackbar message on auth error - default : true
-       authGuardFallbackURL: '/', // url for unauthenticated users - to use in combination with canActivate feature on a route
-       authGuardLoggedInURL: '/login', // url for authenticated users - to use in combination with canActivate feature on a route
+       authGuardFallbackURL: '/login', // url for unauthenticated users - to use in combination with canActivate feature on a route
+       authGuardLoggedInURL: '/welcome', // url for authenticated users - to use in combination with canActivate feature on a route
        passwordMaxLength: 60, // `min/max` input parameters in components should be within this range.
        passwordMinLength: 8, // Password length min/max in forms independently of each componenet min/max.
        // Same as password but for the name
@@ -80,7 +82,7 @@ import { TroncsModule } from './troncs/troncs.module';
        nameMinLength: 2,
        // If set, sign-in/up form is not available until email has been verified.
        // Plus protected routes are still protected even though user is connected.
-       //guardProtectedRoutesUntilEmailIsVerified:true
+       guardProtectedRoutesUntilEmailIsVerified:true
        
 
      })

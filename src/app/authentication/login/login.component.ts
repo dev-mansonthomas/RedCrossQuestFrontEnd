@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
   constructor() { }
 
   printUser(event) {
-    console.log("logged in");
+    console.log("Thomas logged in");
     console.log(event);
 }
 
