@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+
+import { User } from 'firebase/app';
+import { IdTokenResult } from '@firebase/auth-types';
+import { AuthenticationService } from '../authentication.service';
+import { FirebaseJWT } from '../FirebaseJWT';
 
 @Component({
   selector: 'app-login',
@@ -7,11 +13,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+    private authenticationService: AuthenticationService) { }
 
-  printUser(event) {
-    console.log("Thomas logged in");
-    console.log(event);
+  successfulLogin(user:User) {
+
+    console.log(user);
+    user.getIdTokenResult().then((idTokenResult:IdTokenResult)=> {
+      console.log(idTokenResult.token);
+      
+      let token : string = idTokenResult.token;
+      let rcqJWTToken = this.authenticationService.authenticate( { token } as FirebaseJWT);
+      
+
+      rcqJWTToken.subscribe((rcqToken:string)=> console.log("RCQ JWT Token : '"+rcqToken+"'"));
+      
+      this.router.navigate['/welcome'];
+    });    
 }
 
 printError(event) {

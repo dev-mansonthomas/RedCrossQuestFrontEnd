@@ -48,6 +48,12 @@
       <span routerLink="/depart"      class="depart"     ><fa-icon [icon]="faSignOutAlt" ></fa-icon>Départ</span>
       <span routerLink="/retour"      class="retour"     ><fa-icon [icon]="faSignInAlt"  ></fa-icon>Retour</span>
       <span routerLink="/comptage"    class="comptage"   ><fa-icon [icon]="faCoins"      ></fa-icon>Comptage</span>
+
+      <button 
+        type="button" 
+        mat-icon-button
+        (click)="signOut()"
+        ><fa-icon [icon]="faSignOutAlt"></fa-icon> Logout</button>
     </mat-toolbar>
     
     <router-outlet></router-outlet>
