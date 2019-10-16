@@ -2,7 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+
+import { IdTokenResult } from '@firebase/auth-types';
+import { User } from 'firebase/app';
+
+import { from } from 'rxjs';
+import { Router } from '@angular/router';
+import { RCQJWT } from './RCQJWT';
 import { FirebaseJWT } from './FirebaseJWT';
+
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { RCQDecodedJWT } from './RCQDecodedJWT';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,16 +24,57 @@ const httpOptions = {
 export class AuthenticationService {
 
   private authenticationURL = "/rest/firebase-authenticate";
-  constructor( private http: HttpClient) { }
+  private static rcqTokenLabel = "rcq-token";
+  private static rcqTokenDecodedLabel = "rcq-d-token";
+  constructor(  private http: HttpClient,
+                private router: Router,
+                private jwtHelper: JwtHelperService) { }
 
 
-  authenticate(firebaseJWTToken:FirebaseJWT):Observable<String>{
+  /**
+   * Once authenticated to Firebase, send the firebaseJWT to RCQ backend to authenticate and generate an RCQ JWT
+   * the RCQ JWT is stored in local storage
+   * @param firebaseJWTToken - the firebase JWT 
+   */
+  authenticate(firebaseUser:User){
 
-    return this.http.post<String>(this.authenticationURL, firebaseJWTToken, httpOptions)
-    .pipe(
-      tap(_ => console.log('fetched RCQ JWT')),
-      catchError(this.handleError<String>('authenticate', ""))
-    );
+    const observable = from(firebaseUser.getIdTokenResult());
+    return observable.subscribe((idTokenResult:IdTokenResult) =>{
+
+      let token : string = idTokenResult.token;
+      let email : string = idTokenResult.claims.email;
+      let firebaseJWTToken:FirebaseJWT = { token, email } as FirebaseJWT;
+  
+      let rcqJWTObservable = this.http.post<RCQJWT>(this.authenticationURL, firebaseJWTToken, httpOptions)
+      .pipe(
+        tap(_ => console.log('fetched RCQ JWT')),
+        catchError(this.handleError<String>('authenticate', ""))
+      );
+  
+      return rcqJWTObservable.subscribe((rcqToken:RCQJWT)=> {
+        console.log("RCQ JWT Token : ",rcqToken);
+        this.storeRCQJWT(rcqToken.token);
+
+        console.log("RCQ JWT Token from storage: ",localStorage.getItem(AuthenticationService.rcqTokenLabel));
+        //TODO move to login.component.ts
+        this.router.navigate['/welcome'];
+      });
+    });
+  }
+
+  storeRCQJWT(rcqJWT:string)
+  {
+    localStorage.setItem(AuthenticationService.rcqTokenLabel, rcqJWT);
+
+    localStorage.setItem(AuthenticationService.rcqTokenDecodedLabel, JSON.stringify(this.jwtHelper.decodeToken(rcqJWT)));
+  }
+  static getRCQJWT():string
+  {
+    return localStorage.getItem(this.rcqTokenLabel);
+  }
+  static getDecodedRCQJWT():RCQDecodedJWT
+  {
+    return new RCQDecodedJWT(JSON.parse(localStorage.getItem(this.rcqTokenDecodedLabel)));
   }
 
 

@@ -19,17 +19,11 @@ export class LoginComponent implements OnInit {
   successfulLogin(user:User) {
 
     console.log(user);
-    user.getIdTokenResult().then((idTokenResult:IdTokenResult)=> {
-      console.log(idTokenResult.token);
-      
-      let token : string = idTokenResult.token;
-      let rcqJWTToken = this.authenticationService.authenticate( { token } as FirebaseJWT);
-      
 
-      rcqJWTToken.subscribe((rcqToken:string)=> console.log("RCQ JWT Token : '"+rcqToken+"'"));
-      
-      this.router.navigate['/welcome'];
-    });    
+    this.authenticationService.authenticate(user);
+    
+
+
 }
 
 printError(event) {

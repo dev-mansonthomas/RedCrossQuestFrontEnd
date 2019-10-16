@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { QueteurService } from '../queteur.service';
+import { Queteur } from '../Queteur';
+
 
 @Component({
   selector: 'app-queteurs',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QueteursComponent implements OnInit {
 
-  constructor() { }
+  private queteurs:Queteur[];
+
+  constructor(private queteurService:QueteurService) { }
 
   ngOnInit() {
+    this.getQueteurs();
+  }
+
+  getQueteurs():void{
+    this.queteurService.getQueteurs()
+    .subscribe((queteurs:Queteur[])=> this.queteurs = queteurs);
+
   }
 
 }

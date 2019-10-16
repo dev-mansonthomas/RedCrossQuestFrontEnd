@@ -1,5 +1,15 @@
 <p>queteurS works!</p>
 
+<ul class="queteurs">
+    <li *ngFor="let queteur of queteurs">
+      <a routerLink="/queteur/{{queteur.id}}">
+        <span class="badge">{{queteur.id}}</span> {{queteur.first_name}} {{queteur.last_name}}
+      </a>
+      <button class="delete" title="delete hero"
+              (click)="delete(queteur)">x</button>
+    </li>
+  </ul>
+
 
 <a routerLink="/queteur">Un Queteur</a>
 

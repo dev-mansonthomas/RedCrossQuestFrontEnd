@@ -37,6 +37,14 @@ import { LoginComponent } from './authentication/login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { TroncsModule } from './troncs/troncs.module';
 import { CurrentUserComponent } from './authentication/current-user/current-user.component';
+
+import { JwtModule } from "@auth0/angular-jwt";
+import { HttpClientModule } from "@angular/common/http";
+import { AuthenticationService } from './authentication/authentication.service';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UrlInterceptor } from './authentication/url.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,9 +93,23 @@ import { CurrentUserComponent } from './authentication/current-user/current-user
        guardProtectedRoutesUntilEmailIsVerified:true
        
 
-     })
+     })/*,
+     HttpClientModule,
+     JwtModule.forRoot({
+      config: {
+        tokenGetter: AuthenticationService.getRCQJWT,
+        whitelistedDomains: ["localhost"],
+        blacklistedRoutes: ["http://localhost:4200/rest/firebase-authenticate"]
+      }
+    })*/
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
